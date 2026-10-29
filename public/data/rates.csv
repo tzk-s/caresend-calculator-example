@@ -1,0 +1,6 @@
+id,label,hourly_rate,sort_order,enabled
+care-staff,介護職員（資格なし）,1000,10,1
+care-beginner,介護職員初任者研修,1200,20,1
+care-worker,介護福祉士,1500,30,1
+nurse,看護師,2000,40,1
+care-manager,ケアマネジャー,1800,50,0
