@@ -13,7 +13,7 @@
     padding: 0;
     list-style: none;
     counter-reset: step;
-    font-size: 0.875rem;
+    font-size: rem(14);
     color: $color-muted;
   }
 
@@ -37,7 +37,7 @@
 
   &__heading {
     margin: 0 0 spacing(4);
-    font-size: 1.125rem;
+    font-size: rem(18);
 
     // ステップ切替時に JS でフォーカスを移すための tabindex="-1"。枠は出さない
     &:focus {
@@ -57,7 +57,7 @@
 
   &__total-amount {
     display: block;
-    font-size: 2rem;
+    font-size: rem(32);
   }
 
   &__breakdown {
@@ -76,7 +76,7 @@
 
   &__caution {
     margin: 0 0 spacing(6);
-    font-size: 0.875rem;
+    font-size: rem(14);
     color: $color-muted;
   }
 }

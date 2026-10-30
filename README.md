@@ -33,6 +33,8 @@ CSV で管理する料金表を検証してから計算に渡す、派遣料金�
 
 スタイルは FLOCSS の層（Foundation / Layout / Component / Project / Utility）に分け、クラス名の接頭辞で層が分かるようにしています（`l-` `c-` `p-` `u-`）。JavaScript が要素を探すときは `js-` で始まるクラスと `data-*` 属性を使い、`l-` `c-` `p-` `u-` のクラスには触れません。状態の変化は `is-error`・`aria-current`・`hidden` で表し、見た目の切り替えは CSS 側に置いています。そのため、デザインを変えても TypeScript とテストは変更せずに済みます。
 
+文字サイズと余白は、`foundation/_variables.scss` の `rem()` で px の値を rem に変換して書いています（`rem(14)` = `0.875rem`）。ブラウザの文字サイズ設定を変えたときに、文字と余白が一緒に拡大されるようにするためです。
+
 ## 使用技術・実行環境
 
 | 用途 | 使用しているもの |
