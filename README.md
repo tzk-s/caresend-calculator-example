@@ -29,12 +29,17 @@ CSV で管理する料金表を検証してから計算に渡す、派遣料金�
 - **表示する条件と金額を 1 つの試算結果から描画する。** 結果画面の条件欄と金額は、計算関数が返した同じオブジェクトから描画します。入力欄を別に読み直さないので、条件と金額が食い違いません。
 - **非表示の行も検証する。** `enabled=0` の行に不備があっても不採用にします。表示に戻したときに初めて壊れる、という事態を防ぐためです。
 
+### クラス名の付け方
+
+スタイルは FLOCSS の層（Foundation / Layout / Component / Project / Utility）に分け、クラス名の接頭辞で層が分かるようにしています（`l-` `c-` `p-` `u-`）。JavaScript が要素を探すときは `js-` で始まるクラスと `data-*` 属性を使い、`l-` `c-` `p-` `u-` のクラスには触れません。状態の変化は `is-error`・`aria-current`・`hidden` で表し、見た目の切り替えは CSS 側に置いています。そのため、デザインを変えても TypeScript とテストは変更せずに済みます。
+
 ## 使用技術・実行環境
 
 | 用途 | 使用しているもの |
 | --- | --- |
 | 言語 | TypeScript 5.9 |
 | 開発サーバー・ビルド | Vite 7 |
+| スタイル | Sass（SCSS）、FLOCSS の命名・層構成 |
 | CSV の解析 | csv-parse 7（ブラウザ用ビルド） |
 | テスト | Vitest 4、jsdom 27（画面テスト） |
 | 実行環境 | Node.js 20.19 以上、npm |
@@ -51,7 +56,13 @@ CSV で管理する料金表を検証してから計算に渡す、派遣料金�
 │   └── regions.csv         # 派遣地域と単価に掛ける割合（デモ用の仮データ）
 ├── src/
 │   ├── main.ts             # エントリー
-│   ├── style.css           # 公開用の最小スタイル
+│   ├── styles/             # SCSS（FLOCSS）
+│   │   ├── main.scss       # 層の順に読み込むエントリー
+│   │   ├── foundation/     # 値（_variables）と要素の土台（_base）
+│   │   ├── layout/         # l-container
+│   │   ├── component/      # c-button / c-form-field
+│   │   ├── project/        # p-intro / p-simulator
+│   │   └── utility/        # u-visually-hidden
 │   └── simulator/
 │       ├── rates.ts        # CSV の取得・文字コード判定・検証
 │       ├── calc.ts         # 入力値の検証と料金の計算（純粋関数）
@@ -133,7 +144,7 @@ CSV は `fetch` で読み込むため、`index.html` をファイルとして直
 | `src/simulator/calc.ts` | 抽出 | 元の実装と同じです。変更はコメント内のファイル名だけです |
 | `src/simulator/rates.ts` | 抽出・一部変更 | 検証の規則（列・範囲・重複・`enabled`）と文字コード判定は元の実装と同じです。CSV の解析を csv-parse に置き換え、エラーの行番号は csv-parse が返す実際の行を使うようにしました（途中に空行がある場合も正しい行を指します） |
 | `src/simulator/ui.ts` | 再実装 | 元の画面制御を参考に、公開用に作り直しました。下記の違いがあります |
-| `index.html` / `src/style.css` | 新規 | 公開用の簡素なマークアップとスタイルです。元サイトのデザインは含みません |
+| `index.html` / `src/styles/` | 新規 | 公開用の簡素なマークアップとスタイルです。元サイトのデザインと、普段の制作で使っている共通の SCSS（変数・mixin など）は含まず、このサンプル用に書き下ろしました |
 | `tests/calc.test.ts` | 抽出 | 元のテストのうち、計算と入力値の部分です |
 | `tests/rates.test.ts` | 抽出・一部変更 | 元のテストのうち、料金表の検証の部分です。CSV の書き方に関するテストは csv-parse への置き換えに合わせて書き直しました |
 | `tests/ui.test.ts` | 新規 | 画面の代表的な操作を確認するテストです |

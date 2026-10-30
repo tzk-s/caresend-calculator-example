@@ -1,0 +1,41 @@
+@use '../foundation/variables' as *;
+
+// ラベル・入力欄・入力範囲の案内・エラーをまとめた 1 項目。
+.c-form-field {
+  margin-bottom: spacing(4);
+
+  &__label {
+    display: block;
+    margin-bottom: spacing(1);
+    font-weight: 700;
+  }
+
+  &__control {
+    width: 100%;
+    padding: spacing(2) spacing(2.5);
+    border: 1px solid $color-border;
+    border-radius: $radius;
+    background: $color-white;
+
+    @include focus-ring;
+
+    // 状態は JS（ui.ts）が is-error で切り替える。見た目の変更は CSS 側だけに置く
+    &.is-error {
+      border-color: $color-error;
+    }
+  }
+
+  &__hint,
+  &__error {
+    margin: spacing(1) 0 0;
+    font-size: 0.875rem;
+  }
+
+  &__hint {
+    color: $color-muted;
+  }
+
+  &__error {
+    color: $color-error;
+  }
+}

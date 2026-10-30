@@ -1,0 +1,18 @@
+@use '../foundation/variables' as *;
+
+// どの画面でも使える最小単位のボタン。配置（余白・並び）は親の Project 側で決める。
+.c-button {
+  padding: spacing(2.5) spacing(5);
+  border: 1px solid $color-accent;
+  border-radius: $radius;
+  background: $color-accent;
+  color: $color-white;
+  cursor: pointer;
+
+  @include focus-ring;
+
+  &--secondary {
+    background: $color-white;
+    color: $color-accent;
+  }
+}

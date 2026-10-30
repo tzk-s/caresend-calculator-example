@@ -1,0 +1,82 @@
+@use '../foundation/variables' as *;
+
+// 料金シミュレーター固有のレイアウト。Component（c-button / c-form-field）を中に並べる。
+.p-simulator {
+  padding: spacing(6);
+  border: 1px solid $color-border;
+  border-radius: $radius-large;
+
+  &__steps {
+    display: flex;
+    gap: spacing(2);
+    margin: 0 0 spacing(6);
+    padding: 0;
+    list-style: none;
+    counter-reset: step;
+    font-size: 0.875rem;
+    color: $color-muted;
+  }
+
+  &__step {
+    flex: 1;
+    padding-top: spacing(1.5);
+    border-top: 3px solid $color-border;
+    counter-increment: step;
+
+    &::before {
+      content: counter(step) '. ';
+    }
+
+    // 現在のステップは aria-current で判定する（状態用のクラスを別に持たず、読み上げと見た目を一致させる）
+    &[aria-current='step'] {
+      border-top-color: $color-accent;
+      color: $color-text;
+      font-weight: 700;
+    }
+  }
+
+  &__heading {
+    margin: 0 0 spacing(4);
+    font-size: 1.125rem;
+
+    // ステップ切替時に JS でフォーカスを移すための tabindex="-1"。枠は出さない
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: spacing(2);
+  }
+
+  &__total {
+    margin: 0;
+  }
+
+  &__total-amount {
+    display: block;
+    font-size: 2rem;
+  }
+
+  &__breakdown {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    gap: spacing(1) spacing(4);
+    margin: spacing(4) 0;
+    padding: spacing(4);
+    border-radius: $radius;
+    background: $color-surface;
+
+    dd {
+      margin: 0;
+    }
+  }
+
+  &__caution {
+    margin: 0 0 spacing(6);
+    font-size: 0.875rem;
+    color: $color-muted;
+  }
+}
