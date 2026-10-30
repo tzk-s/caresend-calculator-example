@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>派遣料金シミュレーター（公開用サンプル）</title>
+  </head>
+  <body>
+    <main class="page">
+      <h1 class="page__title">派遣料金シミュレーター</h1>
+      <p class="page__note">
+        デモ用の仮データによる試算です。実際の料金を示すものではありません。
+      </p>
+
+      <div class="simulator js-simulator" data-rates-src="data/rates.csv" data-regions-src="data/regions.csv">
+        <ol class="simulator__steps" aria-label="入力の進み具合">
+          <li class="js-simulator-indicator" aria-current="step">派遣条件</li>
+          <li class="js-simulator-indicator">稼働時間</li>
+          <li class="js-simulator-indicator">試算結果</li>
+        </ol>
+
+        <p class="simulator__status js-simulator-status" role="status">料金表を読み込んでいます…</p>
+
+        <form class="simulator__form js-simulator-form" action="#" novalidate hidden>
+          <section class="js-simulator-panel" aria-labelledby="step1-heading">
+            <h2 class="simulator__heading js-simulator-heading" id="step1-heading" tabindex="-1">ステップ1：派遣条件</h2>
+
+            <div class="field">
+              <label for="region">派遣地域</label>
+              <select id="region" class="js-simulator-select" data-field="region" aria-invalid="false" aria-describedby="region-error"></select>
+              <p class="field__error js-simulator-error" id="region-error" data-field="region" hidden></p>
+            </div>
+
+            <div class="field">
+              <label for="job">職種</label>
+              <select id="job" class="js-simulator-select" data-field="job" aria-invalid="false" aria-describedby="job-error"></select>
+              <p class="field__error js-simulator-error" id="job-error" data-field="job" hidden></p>
+            </div>
+
+            <div class="field">
+              <label for="headcount">人数</label>
+              <input id="headcount" class="js-simulator-input" data-field="headcount" inputmode="numeric" autocomplete="off" aria-invalid="false" aria-describedby="headcount-hint headcount-error" />
+              <p class="field__hint js-simulator-hint" id="headcount-hint" data-field="headcount" data-unit="人"></p>
+              <p class="field__error js-simulator-error" id="headcount-error" data-field="headcount" hidden></p>
+            </div>
+
+            <button type="submit" class="button">次へ</button>
+          </section>
+
+          <section class="js-simulator-panel" aria-labelledby="step2-heading" hidden>
+            <h2 class="simulator__heading js-simulator-heading" id="step2-heading" tabindex="-1">ステップ2：稼働時間</h2>
+
+            <div class="field">
+              <label for="hoursPerDay">1日の稼働時間</label>
+              <input id="hoursPerDay" class="js-simulator-input" data-field="hoursPerDay" inputmode="numeric" autocomplete="off" aria-invalid="false" aria-describedby="hoursPerDay-hint hoursPerDay-error" />
+              <p class="field__hint js-simulator-hint" id="hoursPerDay-hint" data-field="hoursPerDay" data-unit="時間"></p>
+              <p class="field__error js-simulator-error" id="hoursPerDay-error" data-field="hoursPerDay" hidden></p>
+            </div>
+
+            <div class="field">
+              <label for="daysPerMonth">月の稼働日数</label>
+              <input id="daysPerMonth" class="js-simulator-input" data-field="daysPerMonth" inputmode="numeric" autocomplete="off" aria-invalid="false" aria-describedby="daysPerMonth-hint daysPerMonth-error" />
+              <p class="field__hint js-simulator-hint" id="daysPerMonth-hint" data-field="daysPerMonth" data-unit="日"></p>
+              <p class="field__error js-simulator-error" id="daysPerMonth-error" data-field="daysPerMonth" hidden></p>
+            </div>
+
+            <div class="simulator__actions">
+              <button type="button" class="button button--secondary js-simulator-back">戻る</button>
+              <button type="submit" class="button">試算する</button>
+            </div>
+          </section>
+        </form>
+
+        <section class="js-simulator-panel" aria-labelledby="result-heading" hidden>
+          <h2 class="simulator__heading js-simulator-heading" id="result-heading" tabindex="-1">試算結果</h2>
+          <p class="simulator__total">
+            月額の概算（税込）<strong><span class="js-simulator-out" data-key="total"></span>円</strong>
+          </p>
+          <dl class="simulator__breakdown">
+            <dt>条件</dt>
+            <dd class="js-simulator-out" data-key="conditions"></dd>
+            <dt>1人あたりの稼働時間</dt>
+            <dd class="js-simulator-out" data-key="hours"></dd>
+            <dt>小計（税抜）</dt>
+            <dd><span class="js-simulator-out" data-key="subtotal"></span>円</dd>
+            <dt>消費税（<span class="js-simulator-out" data-key="taxRate"></span>%）</dt>
+            <dd><span class="js-simulator-out" data-key="tax"></span>円</dd>
+          </dl>
+          <p class="simulator__caution">デモ用の仮データによる試算です。実際の料金を示すものではありません。</p>
+          <div class="simulator__actions">
+            <button type="button" class="button button--secondary js-simulator-back">条件を変更する</button>
+            <button type="button" class="button button--secondary js-simulator-restart">最初からやり直す</button>
+          </div>
+        </section>
+
+        <p class="visually-hidden js-simulator-live" aria-live="polite"></p>
+      </div>
+    </main>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

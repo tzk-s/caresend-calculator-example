@@ -1,0 +1,10 @@
+id,label,rate_percent,sort_order,enabled
+tokyo-23,東京都（23区）,120,10,1
+tokyo-other,東京都（23区外）,110,20,1
+kanagawa,神奈川県,110,30,1
+saitama,埼玉県,105,40,1
+chiba,千葉県,105,50,1
+osaka,大阪府,110,60,1
+aichi,愛知県,105,70,1
+fukuoka,福岡県,105,80,1
+other,その他の地域,100,90,1
