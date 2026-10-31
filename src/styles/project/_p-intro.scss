@@ -1,0 +1,17 @@
+@use '../foundation/variables' as *;
+
+// ページ冒頭の見出しと注意書き
+.p-intro {
+  margin-bottom: spacing(6);
+
+  &__title {
+    margin: 0 0 spacing(2);
+    font-size: rem(24);
+  }
+
+  &__note {
+    margin: 0;
+    font-size: rem(14);
+    color: $color-muted;
+  }
+}
