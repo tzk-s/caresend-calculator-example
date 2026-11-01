@@ -1,0 +1,9 @@
+// エントリー。FLOCSS の層の順（Foundation → Layout → Object（Component → Project → Utility））で読み込む。
+// 後の層ほど詳細度を上げずに上書きできるよう、読み込み順で優先度を決めている。
+@use 'foundation/base';
+@use 'layout/l-container';
+@use 'component/c-button';
+@use 'component/c-form-field';
+@use 'project/p-intro';
+@use 'project/p-simulator';
+@use 'utility/u-visually-hidden';
