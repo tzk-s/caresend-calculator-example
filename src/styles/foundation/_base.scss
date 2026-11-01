@@ -1,0 +1,22 @@
+@use 'variables' as *;
+
+// 要素セレクタだけで書く土台。クラスに依存するスタイルはここに置かない。
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: $color-white;
+  color: $color-text;
+  font-family: $font-family;
+  line-height: 1.6;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
