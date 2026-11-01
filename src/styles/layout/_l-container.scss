@@ -1,0 +1,8 @@
+@use '../foundation/variables' as *;
+
+// ページの横幅と左右の余白。中身の見た目は持たない。
+.l-container {
+  max-width: rem(560);
+  margin: 0 auto;
+  padding: spacing(8) spacing(4) spacing(16);
+}
